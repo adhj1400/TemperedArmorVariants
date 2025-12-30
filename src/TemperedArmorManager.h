@@ -16,6 +16,8 @@ public:
         std::unordered_map<TemperLevel, RE::TESObjectARMA*> levelVariants;
         bool allowElders = true;
         bool allowChildren = false;
+        bool allowFemale = true;
+        bool allowMale = true;
     };
 
     static TemperedArmorManager* GetSingleton() {

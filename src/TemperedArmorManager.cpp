@@ -39,6 +39,17 @@ RE::TESObjectARMA* TemperedArmorManager::GetVariantArmorAddon(RE::TESObjectARMO*
                 }
             }
         }
+
+        auto actorBase = a_actor->GetActorBase();
+        if (actorBase) {
+            auto sex = actorBase->GetSex();
+            if (sex == RE::SEX::kFemale && !variants.allowFemale) {
+                return a_originalAddon;
+            }
+            if (sex == RE::SEX::kMale && !variants.allowMale) {
+                return a_originalAddon;
+            }
+        }
     }
 
     // Get the tempering level from ExtraHealth

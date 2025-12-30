@@ -169,6 +169,38 @@ void ConfigLoader::LoadConfig(const std::filesystem::path& a_path) {
                 }
             }
 
+            // Parse allowFemale setting (defaults to true if not specified)
+            size_t femalePos = variantsObj.find("\"allowFemale\"");
+            if (femalePos != std::string::npos) {
+                size_t colonPos = variantsObj.find(':', femalePos);
+                size_t truePos = variantsObj.find("true", colonPos);
+                size_t falsePos = variantsObj.find("false", colonPos);
+
+                if (falsePos != std::string::npos && (truePos == std::string::npos || falsePos < truePos)) {
+                    variants.allowFemale = false;
+                    logger::trace("  allowFemale: false");
+                } else {
+                    variants.allowFemale = true;
+                    logger::trace("  allowFemale: true");
+                }
+            }
+
+            // Parse allowMale setting (defaults to true if not specified)
+            size_t malePos = variantsObj.find("\"allowMale\"");
+            if (malePos != std::string::npos) {
+                size_t colonPos = variantsObj.find(':', malePos);
+                size_t truePos = variantsObj.find("true", colonPos);
+                size_t falsePos = variantsObj.find("false", colonPos);
+
+                if (falsePos != std::string::npos && (truePos == std::string::npos || falsePos < truePos)) {
+                    variants.allowMale = false;
+                    logger::trace("  allowMale: false");
+                } else {
+                    variants.allowMale = true;
+                    logger::trace("  allowMale: true");
+                }
+            }
+
             if (!variants.levelVariants.empty()) {
                 TemperedArmorManager::GetSingleton()->RegisterArmor(baseForm->As<RE::TESObjectARMO>(), variants);
                 logger::info("Registered armor with {} variant(s): {}|{:08X}", variants.levelVariants.size(),

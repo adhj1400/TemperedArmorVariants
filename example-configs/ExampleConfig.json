@@ -9,7 +9,9 @@
         "epic": "SomeArmorMod.esp|000008BE",
         "legendary": "SomeArmorMod.esp|000008BF",
         "allowElders": true,
-        "allowChildren": true
+        "allowChildren": true,
+        "allowFemale": true,
+        "allowMale": true
       }
     }
   ]
