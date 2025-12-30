@@ -66,11 +66,28 @@ RE::TESObjectARMA* TemperedArmorManager::GetVariantArmorAddon(RE::TESObjectARMO*
         return a_originalAddon;
     }
 
-    // Look up the variant for this tempering level
+    // Look up the variant for this tempering level, or fall back to the highest defined level below it
     auto variantIt = variants.levelVariants.find(temperLevel);
 
     if (variantIt != variants.levelVariants.end() && variantIt->second) {
         return variantIt->second;
+    }
+
+    // Fallback: Search for the highest defined level below the actual tempering level
+    // Check levels in descending order
+    const std::array<TemperLevel, 6> levels = {TemperLevel::Epic, TemperLevel::Flawless, TemperLevel::Exquisite,
+                                               TemperLevel::Superior, TemperLevel::Fine};
+
+    for (const auto& level : levels) {
+        // Only check levels below the actual tempering level
+        if (level < temperLevel) {
+            auto fallbackIt = variants.levelVariants.find(level);
+            if (fallbackIt != variants.levelVariants.end() && fallbackIt->second) {
+                logger::trace("Using fallback variant for tempering level {} (actual level: {})",
+                              static_cast<int>(level), static_cast<int>(temperLevel));
+                return fallbackIt->second;
+            }
+        }
     }
 
     return a_originalAddon;
