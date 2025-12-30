@@ -1,0 +1,16 @@
+{
+  "armors": [
+    {
+      "Skyrim.esm|00012E49": {
+        "fine": "SomeArmorMod.esp|000008BA",
+        "superior": "SomeArmorMod.esp|000008BB",
+        "exquisite": "SomeArmorMod.esp|000008BC",
+        "flawless": "SomeArmorMod.esp|000008BD",
+        "epic": "SomeArmorMod.esp|000008BE",
+        "legendary": "SomeArmorMod.esp|000008BF",
+        "allowElders": true,
+        "allowChildren": true
+      }
+    }
+  ]
+}

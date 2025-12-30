@@ -1,0 +1,14 @@
+# IDE
+.idea
+.vs
+.vscode/settings.json
+
+# Build files
+out
+build
+cmake-build*
+*.dll
+*.pdb
+
+# Skyrim archive files
+*.bsa
