@@ -130,12 +130,12 @@ void ConfigLoader::LoadConfig(const std::filesystem::path& a_path) {
                 }
             };
 
-            parseVariant("fine", TemperedArmorManager::TemperLevel::Fine);
-            parseVariant("superior", TemperedArmorManager::TemperLevel::Superior);
-            parseVariant("exquisite", TemperedArmorManager::TemperLevel::Exquisite);
-            parseVariant("flawless", TemperedArmorManager::TemperLevel::Flawless);
-            parseVariant("epic", TemperedArmorManager::TemperLevel::Epic);
-            parseVariant("legendary", TemperedArmorManager::TemperLevel::Legendary);
+            parseVariant("temperLvl1", TemperedArmorManager::TemperLevel::Fine);
+            parseVariant("temperLvl2", TemperedArmorManager::TemperLevel::Superior);
+            parseVariant("temperLvl3", TemperedArmorManager::TemperLevel::Exquisite);
+            parseVariant("temperLvl4", TemperedArmorManager::TemperLevel::Flawless);
+            parseVariant("temperLvl5", TemperedArmorManager::TemperLevel::Epic);
+            parseVariant("temperLvl6", TemperedArmorManager::TemperLevel::Legendary);
 
             // Parse allowElders setting (defaults to true if not specified)
             size_t eldersPos = variantsObj.find("\"allowElders\"");

@@ -2,12 +2,12 @@
   "armors": [
     {
       "Skyrim.esm|00012E49": {
-        "fine": "SomeArmorMod.esp|000008BA",
-        "superior": "SomeArmorMod.esp|000008BB",
-        "exquisite": "SomeArmorMod.esp|000008BC",
-        "flawless": "SomeArmorMod.esp|000008BD",
-        "epic": "SomeArmorMod.esp|000008BE",
-        "legendary": "SomeArmorMod.esp|000008BF",
+        "temperLvl1": "SomeArmorMod.esp|000008BA",
+        "temperLvl2": "SomeArmorMod.esp|000008BB",
+        "temperLvl3": "SomeArmorMod.esp|000008BC",
+        "temperLvl4": "SomeArmorMod.esp|000008BD",
+        "temperLvl5": "SomeArmorMod.esp|000008BE",
+        "temperLvl6": "SomeArmorMod.esp|000008BF",
         "allowElders": true,
         "allowChildren": true,
         "allowFemale": true,
