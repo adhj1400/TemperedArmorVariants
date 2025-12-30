@@ -19,6 +19,12 @@ RE::TESObjectARMA* TemperedArmorManager::GetVariantArmorAddon(RE::TESObjectARMO*
     // Check if this armor has any registered variants
     std::shared_lock lock(m_lock);
     auto it = m_armorVariants.find(a_armor);
+
+    // If not found, check if this armor has a template armor (TNAM)
+    if (it == m_armorVariants.end() && a_armor->templateArmor) {
+        it = m_armorVariants.find(a_armor->templateArmor);
+    }
+
     if (it == m_armorVariants.end()) {
         return a_originalAddon;
     }
