@@ -4,19 +4,19 @@
 
 namespace Offsets {
     namespace TESNPC {
-        // InitWornForm offset - SE: 1.5.97 = 24736, AE: 1.6.353 = 24583
-        inline constexpr REL::ID InitWornForm(24736);
+        // InitWornForm - SE: 24736, AE: 24583, VR: 0x373CB0
+        inline constexpr auto InitWornForm = MAKE_OFFSET(24736, 24583, 0x373CB0);
     }
 
     namespace TESObjectARMA {
-        // InitWornArmorAddon offset - SE: 1.5.97 = 17759, AE: 1.6.353 = 17812
-        inline constexpr REL::ID InitWornArmorAddon(17759);
+        // InitWornArmorAddon - SE: 17759, AE: 17812, VR: 0x2383A0
+        inline constexpr auto InitWornArmorAddon = MAKE_OFFSET(17759, 17812, 0x2383A0);
     }
 }
 
 void Patches::WriteInitWornPatch(InitWornArmorFunc* a_func) {
     // Hook location: TESNPC::InitWornForm at offset 0x2F0
-    auto hook = REL::Relocation<std::uintptr_t>(Offsets::TESNPC::InitWornForm, 0x2F0);
+    auto hook = util::MakeHook(Offsets::TESNPC::InitWornForm, 0x2F0);
 
     // Create assembly patch using Xbyak
     struct Patch : public Xbyak::CodeGenerator {
@@ -38,7 +38,7 @@ void Patches::WriteInitWornPatch(InitWornArmorFunc* a_func) {
         return;
     }
 
-    logger::debug("Installing InitWornArmor patch at {:X}, size: {} bytes", hook.address(), patchSize);
+    logger::info("Installing InitWornArmor patch at {:X}, size: {} bytes", hook.address(), patchSize);
 
     // Fill with NOPs then write our patch
     REL::safe_fill(hook.address(), REL::NOP, 0x17);

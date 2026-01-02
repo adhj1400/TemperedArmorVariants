@@ -14,6 +14,9 @@ void Hooks::Install() {
 }
 
 void Hooks::InitWornArmor(RE::TESObjectARMO* a_armor, RE::Actor* a_actor, RE::BSTSmartPointer<RE::BipedAnim>* a_biped) {
+    logger::info("InitWornArmor called - armor: {:08X}, actor: {}", a_armor ? a_armor->GetFormID() : 0,
+                 a_actor ? a_actor->GetName() : "null");
+
     if (!a_armor || !a_actor || !a_biped) {
         return;
     }
