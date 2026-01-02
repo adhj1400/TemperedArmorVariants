@@ -4,40 +4,19 @@
 
 namespace Offsets {
     namespace TESNPC {
-        inline std::uintptr_t InitWornForm() {
-            // SE: 1.5.97 = ID 24736, offset 0x5D0F80
-            // AE: 1.6.353+ = ID 24583
-            // VR: offset 0x5EB880
-            if (REL::Module::IsVR()) {
-                return REL::Relocation<std::uintptr_t>(REL::Offset(0x5EB880)).address();
-            } else if (REL::Module::IsAE()) {
-                return REL::Relocation<std::uintptr_t>(REL::ID(24583)).address();
-            } else {
-                return REL::Relocation<std::uintptr_t>(REL::ID(24736)).address();
-            }
-        }
+        // InitWornForm offset - SE: 1.5.97 = 24736, AE: 1.6.353 = 24583
+        inline constexpr REL::ID InitWornForm(24736);
     }
 
     namespace TESObjectARMA {
-        inline std::uintptr_t InitWornArmorAddon() {
-            // SE: 1.5.97 = ID 17759, offset 0x1FD160
-            // AE: 1.6.353+ = ID 17812
-            // VR: offset 0x1FD160
-            if (REL::Module::IsVR()) {
-                return REL::Relocation<std::uintptr_t>(REL::Offset(0x1FD160)).address();
-            } else if (REL::Module::IsAE()) {
-                return REL::Relocation<std::uintptr_t>(REL::ID(17812)).address();
-            } else {
-                return REL::Relocation<std::uintptr_t>(REL::ID(17759)).address();
-            }
-        }
+        // InitWornArmorAddon offset - SE: 1.5.97 = 17759, AE: 1.6.353 = 17812
+        inline constexpr REL::ID InitWornArmorAddon(17759);
     }
 }
 
 void Patches::WriteInitWornPatch(InitWornArmorFunc* a_func) {
     // Hook location: TESNPC::InitWornForm at offset 0x2F0
-    auto base = Offsets::TESNPC::InitWornForm();
-    auto hook = REL::Relocation<std::uintptr_t>(base + 0x2F0);
+    auto hook = REL::Relocation<std::uintptr_t>(Offsets::TESNPC::InitWornForm, 0x2F0);
 
     // Create assembly patch using Xbyak
     struct Patch : public Xbyak::CodeGenerator {
